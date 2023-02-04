@@ -1,0 +1,46 @@
+{
+  "name": "ecs-cdk-exp",
+  "version": "1.0.0",
+  "description": "Mostly here so I can keep track of all my cdk stuff",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build",
+    "prepare": "husky install",
+    "linter": "eslint .",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YashdalfTheGray/ecs-cdk-exp.git"
+  },
+  "author": "Yash Kulshrestha",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/YashdalfTheGray/ecs-cdk-exp/issues"
+  },
+  "homepage": "https://github.com/YashdalfTheGray/ecs-cdk-exp#readme",
+  "dependencies": {
+    "aws-cdk": "^2.62.0",
+    "aws-cdk-lib": "^2.58.0",
+    "constructs": "^10.1.210",
+    "dotenv": "^16.0.3",
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.49.0",
+    "eslint": "^8.31.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.3",
+    "ts-node": "^10.9.1"
+  },
+  "lint-staged": {
+    "**/*": [
+      "eslint --fix --cache",
+      "prettier --write --ignore-unknown"
+    ]
+  }
+}
