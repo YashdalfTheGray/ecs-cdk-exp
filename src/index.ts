@@ -3,14 +3,19 @@ import 'source-map-support/register';
 import * as dotenv from 'dotenv';
 import { App } from 'aws-cdk-lib';
 
-import { EcsClusterWithCapacityStack } from './stacks';
+import { EcsClusterWithCapacityStack, TaskdefStack } from './stacks';
 
 dotenv.config();
 
 const app = new App();
-new EcsClusterWithCapacityStack(app, 'EcsLbExpStack', {
-  env: {
-    account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: process.env.CDK_DEFAULT_REGION,
-  },
+
+const commonEnv = {
+  account: process.env.CDK_DEFAULT_ACCOUNT,
+  region: process.env.CDK_DEFAULT_REGION,
+};
+
+new EcsClusterWithCapacityStack(app, 'EcsLbExpClusterStack', {
+  env: commonEnv,
 });
+
+new TaskdefStack(app, 'EcsLbExpTaskdefStack', { env: commonEnv });
