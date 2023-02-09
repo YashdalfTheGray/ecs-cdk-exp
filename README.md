@@ -1,4 +1,5 @@
 # ecs-cdk-exp
+
 Mostly here so that I can keep track of all my cdk stuff
 
 ## Getting started
@@ -7,7 +8,7 @@ Mostly here so that I can keep track of all my cdk stuff
 aws configure
 npm install
 npm run build
-npm run cdk boostrap
+npm run cdk bootstrap
 npm run cdk synth
 npm run cdk deploy
 ```
