@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/YashdalfTheGray/ecs-cdk-exp#readme",
   "dependencies": {
-    "aws-cdk": "^2.62.0",
+    "aws-cdk": "^2.64.0",
     "aws-cdk-lib": "^2.63.2",
     "constructs": "^10.1.210",
     "dotenv": "^16.0.3",
