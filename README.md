@@ -8,7 +8,7 @@ Mostly here so that I can keep track of all my cdk stuff
 aws configure
 npm install
 npm run build
-npm run cdk bootstrap
+npm run cdk bootstrap -- aws://<account_id>/<preferred_region>
 npm run cdk synth
 npm run cdk deploy
 ```
@@ -20,6 +20,7 @@ npm run cdk deploy
 - `npm run cdk deploy` - deploy this stack to your default AWS account/region
 - `npm run cdk diff` - compare deployed stack with current state
 - `npm run cdk synth` - emits the synthesized CloudFormation template
+- `npm run cdk bootstrap` - bootstrap either a new account and region or change the account and region
 
 ## References
 
