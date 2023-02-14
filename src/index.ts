@@ -15,6 +15,7 @@ const commonEnv = {
 };
 
 new EcsClusterWithCapacityStack(app, 'EcsLbExpClusterStack', {
+  clusterName: 'EcsLbExperiment',
   env: commonEnv,
 });
 

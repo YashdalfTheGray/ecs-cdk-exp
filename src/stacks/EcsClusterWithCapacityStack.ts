@@ -11,12 +11,18 @@ import {
 
 import { Cluster } from 'aws-cdk-lib/aws-ecs';
 
+type EcsClusterWithCapacityStackProps = { clusterName?: string } & StackProps;
+
 export class EcsClusterWithCapacityStack extends Stack {
-  constructor(scope: App, id: string, props?: StackProps) {
+  constructor(
+    scope: App,
+    id: string,
+    props?: EcsClusterWithCapacityStackProps
+  ) {
     super(scope, id, props);
 
     const testCluster = new Cluster(this, 'EcsCluster', {
-      clusterName: 'envvar-example-cluster',
+      clusterName: props?.clusterName || 'EcsClusterWithCapacity',
       capacity: {
         instanceType: InstanceType.of(InstanceClass.T3, InstanceSize.MICRO),
         autoScalingGroupName: `${id}ClusterAsg`,

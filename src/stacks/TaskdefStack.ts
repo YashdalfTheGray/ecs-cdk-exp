@@ -9,7 +9,7 @@ export class TaskdefStack extends Stack {
   constructor(scope: App, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const logGroup = new LogGroup(this, 'EnvvarExamplesLogsGroup', {
+    const logGroup = new LogGroup(this, 'EcsExperimentsLogGroup', {
       logGroupName: `${id}LogGroup`,
       retention: RetentionDays.THREE_DAYS,
     });
