@@ -14,6 +14,9 @@ import { Cluster } from 'aws-cdk-lib/aws-ecs';
 type EcsClusterWithCapacityStackProps = { clusterName?: string } & StackProps;
 
 export class EcsClusterWithCapacityStack extends Stack {
+  public cluster: Cluster;
+  public securityGroup: SecurityGroup;
+
   constructor(
     scope: App,
     id: string,
@@ -21,7 +24,7 @@ export class EcsClusterWithCapacityStack extends Stack {
   ) {
     super(scope, id, props);
 
-    const testCluster = new Cluster(this, 'EcsCluster', {
+    this.cluster = new Cluster(this, 'EcsCluster', {
       clusterName: props?.clusterName || 'EcsClusterWithCapacity',
       capacity: {
         instanceType: InstanceType.of(InstanceClass.T3, InstanceSize.MICRO),
@@ -32,11 +35,11 @@ export class EcsClusterWithCapacityStack extends Stack {
       },
     });
 
-    const securityGroup = new SecurityGroup(this, 'EcsSecurityGroup', {
-      vpc: testCluster.vpc,
+    this.securityGroup = new SecurityGroup(this, 'EcsSecurityGroup', {
+      vpc: this.cluster.vpc,
     });
 
-    securityGroup.addIngressRule(Peer.ipv4('0.0.0.0/0'), Port.tcp(80));
-    securityGroup.addIngressRule(Peer.ipv4('0.0.0.0/0'), Port.tcp(22));
+    this.securityGroup.addIngressRule(Peer.ipv4('0.0.0.0/0'), Port.tcp(80));
+    this.securityGroup.addIngressRule(Peer.ipv4('0.0.0.0/0'), Port.tcp(22));
   }
 }

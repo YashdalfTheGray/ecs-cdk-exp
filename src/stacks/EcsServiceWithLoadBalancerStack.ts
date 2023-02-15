@@ -48,7 +48,6 @@ export class EcsServiceWithLoadBalancerStack extends Stack {
       loadBalancerName: lbName,
       publicLoadBalancer: true,
       openListener: true,
-      vpc: cluster.vpc,
     };
 
     switch (launchType) {
