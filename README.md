@@ -22,7 +22,9 @@ NOTE - if you want to pass arguments directly to CDK, use an extra pair of dashe
 - `npm run cdk deploy` - deploy a stack to your default AWS account/region, usually accompanied with either a stack name or `--all`
 - `npm run cdk diff` - compare deployed stack with current state
 - `npm run cdk synth` - emits the synthesized CloudFormation template
+- `npm run cdk destroy` - spins down given cloudformation stacks, either use a stack name or pass in `--all`
 - `npm run cdk bootstrap` - bootstrap either a new account and region or change the account and region
+- `npm run cdk -- --help` - displays CDK help
 
 ## References
 
