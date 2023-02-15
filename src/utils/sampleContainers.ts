@@ -11,7 +11,7 @@ export function getNginxContainer(
 ): ContainerDefinitionOptions {
   return {
     image: ContainerImage.fromRegistry('nginx'),
-    portMappings: [{ containerPort: 80, hostPort: 80, protocol: Protocol.TCP }],
+    portMappings: [{ containerPort: 80, protocol: Protocol.TCP }],
     logging: LogDrivers.awsLogs({
       logGroup,
       streamPrefix: 'containers/',
