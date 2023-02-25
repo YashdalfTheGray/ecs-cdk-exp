@@ -2,7 +2,9 @@ import { Stack, App, StackProps } from 'aws-cdk-lib';
 import { Cluster, TaskDefinition, LaunchType } from 'aws-cdk-lib/aws-ecs';
 import {
   ApplicationLoadBalancedEc2Service,
+  ApplicationLoadBalancedEc2ServiceProps,
   ApplicationLoadBalancedFargateService,
+  ApplicationLoadBalancedFargateServiceProps,
 } from 'aws-cdk-lib/aws-ecs-patterns';
 import { ApplicationLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 
@@ -46,7 +48,9 @@ export class EcsServiceWithAlbStack extends Stack {
       );
     }
 
-    const commonOptions = {
+    const commonOptions:
+      | ApplicationLoadBalancedEc2ServiceProps
+      | ApplicationLoadBalancedFargateServiceProps = {
       cluster,
       taskDefinition,
       serviceName: this.serviceName,

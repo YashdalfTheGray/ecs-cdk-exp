@@ -6,7 +6,7 @@ import { App } from 'aws-cdk-lib';
 import {
   EcsClusterWithCapacityStack,
   TaskdefStack,
-  EcsServiceWithLoadBalancerStack,
+  EcsServiceWithAlbStack,
 } from './stacks';
 import { LaunchType } from 'aws-cdk-lib/aws-ecs';
 
@@ -32,11 +32,25 @@ const taskdefStack = new TaskdefStack(app, 'EcsLbExpTaskdefStack', {
   env: commonEnv,
 });
 
-new EcsServiceWithLoadBalancerStack(app, 'EcsLbExpServiceStack', {
+const ec2service = new EcsServiceWithAlbStack(app, 'EcsLbExpEc2ServiceStack', {
   env: commonEnv,
   cluster: clusterStack.cluster,
   taskDefinition: taskdefStack.taskdef,
   launchType: LaunchType.EC2,
   serviceName: 'EcsLbExpService',
-  lbName: 'EcsExpLoadBalancer',
+  loadBalancerName: 'EcsExpEc2LoadBalancer',
 });
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const fargateService = new EcsServiceWithAlbStack(
+  app,
+  'EcsLbExpFargateServiceStack',
+  {
+    env: commonEnv,
+    cluster: clusterStack.cluster,
+    taskDefinition: taskdefStack.taskdef,
+    launchType: LaunchType.EC2,
+    serviceName: 'EcsLbExpService',
+    loadBalancerName: 'EcsExpFargateLoadBalancer',
+  }
+);
