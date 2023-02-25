@@ -6,16 +6,17 @@ import {
 } from 'aws-cdk-lib/aws-ecs-patterns';
 import { ApplicationLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 
-type EcsServiceWithLoadBalancerStackProps = {
+type EcsServiceWithAlbStackProps = {
   cluster: Cluster;
   taskDefinition: TaskDefinition;
   launchType: LaunchType;
   desiredCount?: number;
   serviceName?: string;
-  lbName?: string;
+  loadBalancerName?: string;
+  loadBalancer?: ApplicationLoadBalancer;
 } & StackProps;
 
-export class EcsServiceWithLoadBalancerStack extends Stack {
+export class EcsServiceWithAlbStack extends Stack {
   public service:
     | ApplicationLoadBalancedEc2Service
     | ApplicationLoadBalancedFargateService;
@@ -23,11 +24,7 @@ export class EcsServiceWithLoadBalancerStack extends Stack {
   public launchType: LaunchType;
   public serviceName: string;
 
-  constructor(
-    scope: App,
-    id: string,
-    props: EcsServiceWithLoadBalancerStackProps
-  ) {
+  constructor(scope: App, id: string, props: EcsServiceWithAlbStackProps) {
     super(scope, id, props);
 
     const {
@@ -36,18 +33,26 @@ export class EcsServiceWithLoadBalancerStack extends Stack {
       taskDefinition,
       desiredCount,
       serviceName,
-      lbName,
+      loadBalancerName,
+      loadBalancer,
     } = props;
 
     this.launchType = launchType;
     this.serviceName = serviceName || `${id}Service`;
+
+    if (loadBalancerName && loadBalancer) {
+      throw new TypeError(
+        'Only one of `lbName` or `loadBalancer` can be specified'
+      );
+    }
 
     const commonOptions = {
       cluster,
       taskDefinition,
       serviceName: this.serviceName,
       desiredCount: desiredCount || 1,
-      loadBalancerName: lbName,
+      loadBalancerName,
+      loadBalancer,
       publicLoadBalancer: true,
       openListener: true,
     };
