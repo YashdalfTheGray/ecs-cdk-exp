@@ -4,6 +4,7 @@ import {
   ApplicationLoadBalancedEc2Service,
   ApplicationLoadBalancedFargateService,
 } from 'aws-cdk-lib/aws-ecs-patterns';
+import { ApplicationLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 
 type EcsServiceWithLoadBalancerStackProps = {
   cluster: Cluster;
@@ -18,6 +19,7 @@ export class EcsServiceWithLoadBalancerStack extends Stack {
   public service:
     | ApplicationLoadBalancedEc2Service
     | ApplicationLoadBalancedFargateService;
+  public loadBalancer: ApplicationLoadBalancer;
   public launchType: LaunchType;
   public serviceName: string;
 
@@ -69,5 +71,7 @@ export class EcsServiceWithLoadBalancerStack extends Stack {
           commonOptions
         );
     }
+
+    this.loadBalancer = this.service.loadBalancer;
   }
 }
