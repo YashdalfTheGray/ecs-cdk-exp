@@ -37,7 +37,7 @@ const ec2service = new EcsServiceWithAlbStack(app, 'EcsLbExpEc2ServiceStack', {
   cluster: clusterStack.cluster,
   taskDefinition: taskdefStack.taskdef,
   launchType: LaunchType.EC2,
-  serviceName: 'EcsLbExpService',
+  serviceName: 'EcsLbExpEc2Service',
   loadBalancerName: 'EcsExpEc2LoadBalancer',
 });
 
@@ -50,7 +50,7 @@ const fargateService = new EcsServiceWithAlbStack(
     cluster: clusterStack.cluster,
     taskDefinition: taskdefStack.taskdef,
     launchType: LaunchType.EC2,
-    serviceName: 'EcsLbExpService',
+    serviceName: 'EcsLbExpFargateService',
     loadBalancerName: 'EcsExpFargateLoadBalancer',
   }
 );
